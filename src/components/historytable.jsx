@@ -8,8 +8,7 @@ const HistoryTable = ({ historyData }) => {
       <table className="trending-table">
         <thead>
           <tr className="">
-            <th>S.No</th>
-          
+            <th>S.No</th>   
             <th>URL</th>
             <th>Result</th>
           </tr>
