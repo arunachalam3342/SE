@@ -16,9 +16,6 @@ function Login({ onSuccessfulLogin, onLoginFailure }) {
                 password,
             });
 
-
-
-
             // Check the response from the server
             if (response.data.success) {
                 // If login is successful, call the onSuccessfulLogin callback
