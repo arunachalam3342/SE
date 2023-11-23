@@ -52,8 +52,8 @@ const CsvTable = () => {
           <tr>
             <th>S.No</th>
             <th>POST</th>
-            <th>Intent</th>
-            <th>Result</th>
+            <th colSpan={2}>Intent</th>
+            <th colSpan={2}>Result</th>
           </tr>
         </thead>
         <tbody>
