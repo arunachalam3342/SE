@@ -51,7 +51,7 @@ def store_url_endpoint():
 @app.route('/getHistory', methods=['GET'])
 def get_history():
     username = request.args.get('username')
-    print({username})
+    
     if username:
         user_file_path = f"history/{username}_data.json"
         default_file_path = "history/data.json"
@@ -77,7 +77,7 @@ def login():
     username = data.get('username')
     password = data.get('password')
 
-    print(f"Received data - Username: {username}, Password: {password}")
+   
 
     valid_users = {
         'Arun': '1234',
@@ -97,7 +97,7 @@ def login():
 
 @app.route('/')
 def index():
-    return 'HELLO'
+    return 'Backend Connected'
 
 
 if __name__ == '__main__':
