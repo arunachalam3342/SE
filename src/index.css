@@ -219,3 +219,40 @@ body::-webkit-scrollbar {
     display: none;
   }
 }
+
+.tableFixHead { 
+  color: white;
+  width: 100%; 
+
+  border-collapse: collapse; 
+  background-color: transparent;
+} 
+  .tableFixHead tbody { 
+  display: block; 
+  width: 100%; 
+  overflow: auto; 
+  height: 35rem; 
+  font-size: 0.8rem;
+  text-align: justify;
+  border:1px solid black;
+} 
+.tableFixHead thead tr { 
+  display: block; 
+  font-size: 1.2rem;
+  text-decoration: underline;
+  text-align: justify;
+} 
+.tableFixHead th, 
+.tableFixHead  td { 
+  padding: 5px 6px; 
+  width: 30rem;  
+} 
+
+
+.tableFixHead td{
+  border:1px solid black;
+}
+/* width */
+::-webkit-scrollbar {
+  display:none;
+}
