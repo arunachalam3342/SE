@@ -1,65 +1,77 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useRef } from "react";
+import Records from "../assets/data/final_analysis.json";
 
-function URL({userName}) {
-    const [url, setURL] = useState("");
-    const [username,setUserName]=useState("")
+const CsvTable = () => {
+  const [jsonData, setJsonData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [displayRows, setDisplayRows] = useState(1);
+  const tableRef = useRef(null);
 
-    const handleURLSubmit = async () => {
-        setUserName(userName);
-        const data = {
-            username, 
-            url,
-        };
+  useEffect(() => {
+    setJsonData(Records);
+  }, []);
+  const handleIntersection = (entries) => {
+    const target = entries[0];
+    if (target.isIntersecting && !isLoading) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setDisplayRows((prevDisplayRows) => prevDisplayRows + 10);
+        setIsLoading(false);
+      }, 1000); // Simulate a delay, replace this with actual data fetching logic
+    }
+  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 1.0,
+    });
 
-        try {
-            // Send a POST request to the Flask endpoint
-            const response = await axios.post("http://localhost:5000/storeURL", data);
-
-            if (response.data.success) {
-                // If URL submission is successful, clear the input
-                setURL("Safe");
-                alert("URL submitted successfully");
-            } 
-        } catch (error) {
-            console.error("URL submission error:", error);
-            alert("URL submission failed");
-        }
+    if (tableRef.current) {
+      observer.observe(tableRef.current);
     }
 
-    return (
-        <div>
-            <h1 className="text-center">Website URL Submission</h1>
-            <div className="container-form">
-                <form className="my-4">
-                    <div className="container mx-auto">
-                        <div className="form-group mt-4 mx-auto text-center">
-                            <label htmlFor="url">URL:</label>
-                            <input
-                                type="text"
-                                style={{ width: '70%' }}
-                                className="form-control col-md-4 mx-auto"
-                                id="url"
-                                name="url"
-                                required
-                                value={url}
-                                onChange={(e) => setURL(e.target.value)}
-                            />
-                        </div>
+    return () => observer.disconnect();
+  }, [tableRef]);
 
-                        <button
-                            className="btn btn-info btn-block my-3"
-                            style={{ borderRadius: 50, fontWeight: 1000 }}
-                            type="button"
-                            onClick={handleURLSubmit}
-                        >
-                            SUBMIT URL
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    );
-}
+  const getColorBasedOnResult = (result) => {
+    const percentage = Math.round(result * 100);
+    if (percentage > 0) {
+      return "green";
+    } else if (percentage==0) {
+      return "yellow";
+    } else {
+      return "red";
+    }
+  };
 
-export default URL;
+  return (
+    <div>
+      <div className="container">
+      <table className="tableFixHead" ref={tableRef}>
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>POST</th>
+            <th colSpan={2}>Intent</th>
+            <th colSpan={2}>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          {jsonData.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              <td>{rowIndex+1}</td> 
+              <td>{row.Post}</td>
+              <td>{row.Intent_Analysis}</td>
+              <td style={{ fontWeight:600,color:"black",backgroundColor: getColorBasedOnResult(row.Result)}}>{Math.round(row.Result*100)}%</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {isLoading && <p>Loading...</p>}
+    </div>
+    </div>
+  );
+};
+
+export default CsvTable;
