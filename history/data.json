@@ -1,10 +1,10 @@
 [
     {
-      "url": "https://example.com",
+      "url": "https://www.reddit.com/thread1/",
       "result": "Safe"
     },
     {
-      "url": "https://another-example.com",
+      "url": "https://www.reddit.com/thread2/",
       "result": "Unsafe"
     }
   ]
