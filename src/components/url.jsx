@@ -18,11 +18,9 @@ function URL({userName}) {
 
             if (response.data.success) {
                 // If URL submission is successful, clear the input
-                setURL("");
+                setURL("Safe");
                 alert("URL submitted successfully");
-            } else {
-                alert("URL submission failed");
-            }
+            } 
         } catch (error) {
             console.error("URL submission error:", error);
             alert("URL submission failed");
