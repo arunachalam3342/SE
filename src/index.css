@@ -223,7 +223,6 @@ body::-webkit-scrollbar {
 .tableFixHead { 
   color: white;
   width: 100%; 
-
   border-collapse: collapse; 
   background-color: transparent;
 } 
@@ -231,7 +230,7 @@ body::-webkit-scrollbar {
   display: block; 
   width: 100%; 
   overflow: auto; 
-  height: 35rem; 
+  height: 35rem ; 
   font-size: 0.8rem;
   text-align: justify;
   border:1px solid black;
