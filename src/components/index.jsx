@@ -67,10 +67,17 @@ const Index = () => {
               <CsvTable />
             </>
           ) : (
+            <>
             <Login
               onSuccessfulLogin={handleSuccessfulLogin}
               onLoginFailure={handleLoginFailure}
             />
+            {showAlert && (
+            <div>
+              
+            </div>
+          )}
+            </>
           )}
           {showAlert && (
             <div className="alert alert-danger" role="alert">
